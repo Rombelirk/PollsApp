@@ -1,3 +1,4 @@
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
@@ -10,24 +11,18 @@ import { LoginDto } from './dto/login.dto';
 export class AuthService {
     constructor(private readonly userService: UserService, private readonly jwtService: JwtService) {}
 
-    async validateUser(input: LoginInput): Promise<UserDto | null> {
+    async validateUser(input: LoginInput): Promise<User> {
         const { login, password } = input;
         const user = await this.userService.findOneByLogin(login);
         if (user && user.password === password) {
-            const { password, ...result } = user;
-            return result;
+            return user;
         }
-        return null;
+        throw new Error('User not found');
     }
 
     async login(user: LoginInput): Promise<LoginDto> {
         const validatedUser = await this.validateUser(user);
-
-        if (validatedUser === null) {
-            throw new Error('User not found');
-        }
-
-        const result = { ...validatedUser, jwtToken: this.jwtService.sign(validatedUser) };
+        const result = { user: validatedUser, jwtToken: this.jwtService.sign(validatedUser.toJSON()) };
         return result;
     }
 }

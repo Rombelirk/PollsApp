@@ -1,10 +1,12 @@
-import { Resolver, Query, Mutation, Args, Parent, ResolveProperty } from '@nestjs/graphql';
-import { UserDto } from './dto/user.dto';
-import { UserService } from './user.service';
-import { UserLoginInput } from './inputs/user-login.input';
-import { GqlAuthGuard } from '../gql-auth-guard';
 import { UseGuards } from '@nestjs/common';
-import { CurrentUser } from './decorators/curretnt-user';
+import { GqlAuthGuard } from '../gql-auth-guard';
+import { Args, Mutation, Parent, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
+import { CurrentUser } from './decorators/current-user';
+import { UserDto } from './dto/user.dto';
+import { UserLoginInput } from './inputs/user-login.input';
+import { UserService } from './user.service';
+import { User } from './interfaces/user.interface';
+import { TaskDto } from 'src/task/dto/task.dto';
 
 @Resolver(() => UserDto)
 export class UserResolver {
@@ -22,10 +24,10 @@ export class UserResolver {
         return this.userService.findAll();
     }
 
-    // @ResolveProperty()
-    // async friends(@Parent() user: UserDto) {
-    //     return [{ _id: "sdfsdf", login: "f", name: "f" }]
-    // }
+    @ResolveProperty(() => [TaskDto])
+    async tasks(@Parent() user: User) {
+        return this.userService.getUserTasks(user);
+    }
 
     @Mutation(() => UserDto)
     async createUser(@Args('input') input: UserLoginInput) {

@@ -5,10 +5,10 @@ import { LoginInput } from './inputs/login.input';
 
 @Resolver()
 export class AuthResolver {
-    constructor(private readonly AuthService: AuthService) {}
+    constructor(private readonly authService: AuthService) {}
 
     @Query(() => LoginDto)
     async login(@Args('input') input: LoginInput) {
-        return this.AuthService.login(input);
+        return this.authService.login(input);
     }
 }

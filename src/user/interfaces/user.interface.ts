@@ -1,7 +1,9 @@
 import { Document } from 'mongoose';
+import { Task } from '../../task/interfaces/task.interface';
 
 export interface User extends Document {
-    readonly _id: string;
-    readonly login: string;
-    readonly password: string;
+    _id: string;
+    login: string;
+    password: string;
+    tasks: Task[];
 }

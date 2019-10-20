@@ -1,8 +1,10 @@
+import { TaskDto } from './../../task/dto/task.dto';
 import { InputType, Field } from 'type-graphql';
+
 @InputType()
 export class UserLoginInput {
     @Field()
-    readonly login!: string;
+    login: string;
     @Field()
-    readonly password!: string;
+    password: string;
 }

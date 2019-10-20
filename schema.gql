@@ -3,9 +3,13 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
 type LoginDto {
-  _id: String!
-  login: String!
+  user: UserDto!
   jwtToken: String!
 }
 
@@ -16,17 +20,39 @@ input LoginInput {
 
 type Mutation {
   createUser(input: UserLoginInput!): UserDto!
+  createTask(input: TaskInput!): TaskDto!
 }
 
 type Query {
   getSelfInfo: UserDto!
   getAllUsers: [UserDto!]!
   login(input: LoginInput!): LoginDto!
+  getTasksAssignedToUser(userId: String!): [TaskDto!]!
+}
+
+type TaskDto {
+  _id: String!
+  title: String!
+  assignees: [UserDto!]!
+  author: UserDto!
+  create_date: DateTime!
+  deadline: DateTime!
+  description: String!
+  imageURL: String!
+}
+
+input TaskInput {
+  title: String!
+  assignees: [String!]
+  deadline: DateTime
+  description: String!
+  imageURL: String!
 }
 
 type UserDto {
   _id: String!
   login: String!
+  tasks: [TaskDto!]!
 }
 
 input UserLoginInput {
