@@ -10,14 +10,17 @@ export class UserService {
     constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
     async create(createUserInput: UserLoginInput): Promise<User> {
+        const { login } = createUserInput;
+        const foundUser = await this.findOneByLogin(login);
+        if (foundUser) {
+            throw new Error('User with such login already exists');
+        }
         const createdUser = new this.UserModel(createUserInput);
         return createdUser.save();
     }
 
     async findOneByLogin(login: string): Promise<User | null> {
-        const foundUser = await this.UserModel.findOne({ login });
-
-        return foundUser;
+        return await this.UserModel.findOne({ login });
     }
 
     async findById(id: string): Promise<User | null> {
