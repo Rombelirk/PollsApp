@@ -52,6 +52,7 @@ input TaskInput {
 type UserDto {
   _id: String!
   login: String!
+  friends: [UserDto!]!
   tasks: [TaskDto!]!
 }
 

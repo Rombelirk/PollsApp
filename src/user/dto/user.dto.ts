@@ -1,10 +1,16 @@
 import { ObjectType, Field } from 'type-graphql';
+import { TaskDto } from 'src/task/dto/task.dto';
 @ObjectType()
 export class UserDto {
     @Field()
-    readonly _id: string;
+    _id: string;
+
     @Field()
-    readonly login: string;
-    // @Field(type => UserDto)
-    // friends: UserDto[]
+    login: string;
+
+    @Field((type) => UserDto)
+    friends: UserDto[];
+
+    @Field((type) => TaskDto)
+    tasks: TaskDto[];
 }

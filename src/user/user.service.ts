@@ -2,16 +2,13 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './interfaces/user.interface';
-import { Task } from '../task/interfaces/task.interface';
 import { UserLoginInput } from './inputs/user-login.input';
-import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectModel('User')
-        private readonly UserModel: Model<User>,
-        private readonly config: ConfigService
+        private readonly UserModel: Model<User>
     ) {}
 
     async create(createUserInput: UserLoginInput): Promise<User> {
@@ -25,15 +22,23 @@ export class UserService {
     }
 
     async findOneByLogin(login: string): Promise<User | null> {
-        return await this.UserModel.findOne({ login });
+        return this.UserModel.findOne({ login });
     }
 
     async findById(id: string): Promise<User | null> {
-        const foundUser = await this.UserModel.findById(id);
-        return foundUser;
+        return this.UserModel.findById(id);
+    }
+
+    async getFriends(id: string): Promise<User[] | null> {
+        const user = await this.UserModel.findById(id);
+        if (!user) {
+            throw new Error(`Failed to get user with id ${id}`);
+        }
+        const populatedUser = await user.populate('friends').execPopulate();
+        return populatedUser.friends;
     }
 
     async findAll(): Promise<User[]> {
-        return await this.UserModel.find().exec();
+        return this.UserModel.find().exec();
     }
 }

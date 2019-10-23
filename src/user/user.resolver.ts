@@ -30,6 +30,11 @@ export class UserResolver {
         return this.taskService.getTasksAssignedToUser(user._id);
     }
 
+    @ResolveProperty(() => [UserDto])
+    async friends(@Parent() user: User) {
+        return this.userService.getFriends(user._id);
+    }
+
     @Mutation(() => UserDto)
     async createUser(@Args('input') input: UserLoginInput) {
         return this.userService.create(input);
