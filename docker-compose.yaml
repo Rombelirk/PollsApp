@@ -1,0 +1,36 @@
+version: '2'
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - backend
+
+  api:
+    build: .
+    command: "npm run start:dev"
+    environment:
+     - NODE_ENV=development
+     - DATABASE_URL=mongodb://mongo/ORG
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    external_links:
+      - mongo
+    ports:
+      - "3000:3000"
+    volumes:
+        - ./:/app
+    restart: always
+    networks:
+      - backend
+ 
+
+networks:
+  backend:

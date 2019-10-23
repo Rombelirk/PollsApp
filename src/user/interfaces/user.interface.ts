@@ -5,5 +5,4 @@ export interface User extends Document {
     _id: string;
     login: string;
     password: string;
-    tasks: Task[];
 }

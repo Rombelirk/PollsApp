@@ -4,10 +4,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './interfaces/user.interface';
 import { Task } from '../task/interfaces/task.interface';
 import { UserLoginInput } from './inputs/user-login.input';
+import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class UserService {
-    constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
+    constructor(
+        @InjectModel('User')
+        private readonly UserModel: Model<User>,
+        private readonly config: ConfigService
+    ) {}
 
     async create(createUserInput: UserLoginInput): Promise<User> {
         const { login } = createUserInput;
@@ -26,14 +31,6 @@ export class UserService {
     async findById(id: string): Promise<User | null> {
         const foundUser = await this.UserModel.findById(id);
         return foundUser;
-    }
-
-    async getUserTasks(user: User): Promise<Task[]> {
-        const tasks = await user
-            .populate('tasks')
-            .execPopulate()
-            .then((res) => res.tasks);
-        return tasks;
     }
 
     async findAll(): Promise<User[]> {

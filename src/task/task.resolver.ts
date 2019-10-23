@@ -14,21 +14,12 @@ export class TaskResolver {
     @Query(() => [TaskDto])
     @UseGuards(GqlAuthGuard)
     async getTasksAssignedToUser(@Args('userId') userId: string) {
-        if (!userId) {
-            throw new Error('No user id provided');
-        }
         return this.taskService.getTasksAssignedToUser(userId);
     }
 
     @Mutation(() => TaskDto)
     @UseGuards(GqlAuthGuard)
     async createTask(@Args('input') input: TaskInput, @CurrentUser() user: User) {
-        // toDo: wrap it up into a transaction
-        const { assignees } = input;
-        const task = await this.taskService.create(input, user);
-        if (assignees) {
-            await this.taskService.assignTaskToUsers(assignees, task._id);
-        }
-        return task;
+        return this.taskService.create(input, user);
     }
 }

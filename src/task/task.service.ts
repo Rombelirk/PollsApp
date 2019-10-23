@@ -7,10 +7,7 @@ import { TaskInput } from './inputs/task.input';
 
 @Injectable()
 export class TaskService {
-    constructor(
-        @InjectModel('Task') private readonly taskModel: Model<Task>,
-        @InjectModel('User') private readonly userModel: Model<User>
-    ) {}
+    constructor(@InjectModel('Task') private readonly taskModel: Model<Task>) {}
     async getAll(): Promise<Task[]> {
         return this.taskModel.find().exec();
     }
@@ -28,12 +25,10 @@ export class TaskService {
         return createdTask.save();
     }
 
-    async assignTaskToUsers(assigneeIds: string[], taskId: string): Promise<boolean> {
-        await this.userModel.updateMany({ _id: { $in: assigneeIds } }, { $push: { tasks: taskId } });
-        return true;
-    }
-
     async getTasksAssignedToUser(userId: string): Promise<Task[]> {
+        if (!userId) {
+            throw new Error('No user id provided');
+        }
         return this.taskModel.find({ assignees: userId });
     }
 }

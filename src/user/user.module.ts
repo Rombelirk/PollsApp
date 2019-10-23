@@ -3,9 +3,11 @@ import { UserResolver } from './user.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './user.schema';
 import { UserService } from './user.service';
+import { TaskModule } from '../task/task.module';
+import { ConfigModule } from '../config/config.module';
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
+    imports: [ConfigModule, TaskModule, MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
     providers: [UserService, UserResolver],
     exports: [UserService],
 })

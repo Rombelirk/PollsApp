@@ -26,8 +26,8 @@ type Mutation {
 type Query {
   getSelfInfo: UserDto!
   getAllUsers: [UserDto!]!
-  login(input: LoginInput!): LoginDto!
   getTasksAssignedToUser(userId: String!): [TaskDto!]!
+  login(input: LoginInput!): LoginDto!
 }
 
 type TaskDto {

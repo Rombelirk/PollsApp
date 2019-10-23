@@ -14,6 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: any) {
+        //toDo: check if user exists
         return payload;
     }
 }

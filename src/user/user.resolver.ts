@@ -5,12 +5,13 @@ import { CurrentUser } from './decorators/current-user';
 import { UserDto } from './dto/user.dto';
 import { UserLoginInput } from './inputs/user-login.input';
 import { UserService } from './user.service';
+import { TaskService } from '../task/task.service';
 import { User } from './interfaces/user.interface';
 import { TaskDto } from 'src/task/dto/task.dto';
 
 @Resolver(() => UserDto)
 export class UserResolver {
-    constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService, private readonly taskService: TaskService) {}
 
     @Query((returns) => UserDto)
     @UseGuards(GqlAuthGuard)
@@ -26,7 +27,7 @@ export class UserResolver {
 
     @ResolveProperty(() => [TaskDto])
     async tasks(@Parent() user: User) {
-        return this.userService.getUserTasks(user);
+        return this.taskService.getTasksAssignedToUser(user._id);
     }
 
     @Mutation(() => UserDto)
