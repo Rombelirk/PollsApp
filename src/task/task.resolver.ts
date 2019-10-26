@@ -20,6 +20,6 @@ export class TaskResolver {
     @Mutation(() => TaskDto)
     @UseGuards(GqlAuthGuard)
     async createTask(@Args('input') input: TaskInput, @CurrentUser() user: User) {
-        return this.taskService.create(input, user);
+        return this.taskService.create(input, user._id);
     }
 }

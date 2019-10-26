@@ -12,20 +12,20 @@ export class TaskService {
         return this.taskModel.find().exec();
     }
 
-    async getById(id: string): Promise<Task | null> {
+    async getById(id: Task['_id']): Promise<Task | null> {
         return this.taskModel.findById(id);
     }
 
-    async create(createUserInput: TaskInput, user: User): Promise<Task> {
+    async create(createUserInput: TaskInput, userId: User['_id']): Promise<Task> {
         const finalInput = {
             ...createUserInput,
-            author: user._id,
+            author: userId,
         };
         const createdTask = new this.taskModel(finalInput);
         return createdTask.save();
     }
 
-    async getTasksAssignedToUser(userId: string): Promise<Task[]> {
+    async getTasksAssignedToUser(userId: User['_id']): Promise<Task[]> {
         if (!userId) {
             throw new Error('No user id provided');
         }

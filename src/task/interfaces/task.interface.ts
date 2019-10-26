@@ -2,10 +2,9 @@ import { User } from './../../user/interfaces/user.interface';
 import { Document } from 'mongoose';
 
 export interface Task extends Document {
-    _id: string;
     title: string;
-    assignees: User[];
-    author: User;
+    assignees: User['_id'][] | User[];
+    author: User['_id'] | User;
     create_date: Date;
     deadline: Date;
     description: string;

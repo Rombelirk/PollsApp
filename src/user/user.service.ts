@@ -25,20 +25,15 @@ export class UserService {
         return this.UserModel.findOne({ login });
     }
 
-    async findById(id: string): Promise<User | null> {
+    async findById(id: User['_id']): Promise<User | null> {
         return this.UserModel.findById(id);
-    }
-
-    async getFriends(id: string): Promise<User[] | null> {
-        const user = await this.UserModel.findById(id);
-        if (!user) {
-            throw new Error(`Failed to get user with id ${id}`);
-        }
-        const populatedUser = await user.populate('friends').execPopulate();
-        return populatedUser.friends;
     }
 
     async findAll(): Promise<User[]> {
         return this.UserModel.find().exec();
+    }
+
+    async findManyByIds(ids: User['_id'][]): Promise<User[]> {
+        return await this.UserModel.find({ _id: { $in: ids } });
     }
 }

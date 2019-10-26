@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { TaskModule } from './task/task.module';
 import { ConfigModule } from './config/config.module';
+import { FriendshipModule } from './friendship/friendship.module';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { ConfigModule } from './config/config.module';
         AuthModule,
         UserModule,
         TaskModule,
+        FriendshipModule,
         MongooseModule.forRoot(new ConfigService().get('DATABASE_URL')),
         GraphQLModule.forRoot({
             autoSchemaFile: 'schema.gql',
