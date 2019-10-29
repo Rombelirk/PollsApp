@@ -2,20 +2,20 @@ import { ObjectType, Field } from 'type-graphql';
 import { UserDto } from 'src/user/dto/user.dto';
 @ObjectType()
 export class TaskDto {
-    @Field()
+    @Field({ name: '_id' })
     _id: string;
-    @Field()
+    @Field({ name: 'title' })
     title: string;
-    @Field((type) => UserDto)
+    @Field((type) => UserDto, { name: "assignees" })
     assignees: UserDto[];
-    @Field((type) => UserDto)
+    @Field((type) => UserDto, { name: "author" })
     author: UserDto;
-    @Field()
+    @Field({ name: 'create_date' })
     create_date: Date;
-    @Field()
+    @Field({ name: 'deadline' })
     deadline: Date;
-    @Field()
+    @Field({ name: 'description' })
     description: string;
-    @Field()
+    @Field({ name: 'imageURL' })
     imageURL: string;
 }

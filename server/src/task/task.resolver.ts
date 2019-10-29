@@ -7,9 +7,9 @@ import { GqlAuthGuard } from '../gql-auth-guard';
 import { CurrentUser } from '../user/decorators/current-user';
 import { User } from '../user/interfaces/user.interface';
 
-@Resolver(() => TaskDto)
+@Resolver('Task')
 export class TaskResolver {
-    constructor(private readonly taskService: TaskService) {}
+    constructor(private readonly taskService: TaskService) { }
 
     @Query(() => [TaskDto])
     @UseGuards(GqlAuthGuard)

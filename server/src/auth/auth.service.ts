@@ -9,7 +9,7 @@ import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly userService: UserService, private readonly jwtService: JwtService) {}
+    constructor(private readonly userService: UserService, private readonly jwtService: JwtService) { }
 
     async validateUser(input: LoginInput): Promise<User> {
         const { login, password } = input;

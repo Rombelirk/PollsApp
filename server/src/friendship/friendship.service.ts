@@ -12,7 +12,7 @@ export class FriendshipService {
         @InjectModel('Friendship')
         private readonly friendsipModel: Model<Friendship>,
         private readonly userService: UserService
-    ) {}
+    ) { }
 
     async getUsersFriendship(userIds: [string, string]): Promise<Friendship | null> {
         return this.friendsipModel.findOne({
@@ -23,7 +23,7 @@ export class FriendshipService {
         });
     }
 
-    async createRequest(requesterId: User['_id'], recipientId: User['_id']): Promise<Friendship> {
+    async createRequest(recipientId: User['_id'], requesterId: User['_id']): Promise<Friendship> {
         if (requesterId === recipientId) {
             throw new Error(`Friendship members cannot be the same user`);
         }
