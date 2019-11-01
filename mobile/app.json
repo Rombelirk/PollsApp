@@ -1,5 +1,6 @@
 {
   "expo": {
+    "entryPoint": "./src/app/App.tsx",
     "name": "Organizer",
     "slug": "mobile",
     "privacy": "public",

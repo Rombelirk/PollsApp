@@ -4,6 +4,6 @@ module.exports = {
             name: "Organizer",
             url: "http://localhost:3000/graphql"
         },
-        includes: ["./screens/**/*.{ts,tsx,js,jsx,graphql}"]
+        includes: ["./src/**/*.{ts,tsx,js,jsx,graphql}"]
     }
 };

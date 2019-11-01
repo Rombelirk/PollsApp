@@ -23,7 +23,7 @@ const Authentication: FC<Props> = ({ onFormSubmit }) => {
     const onInputChange = (type: string) => (text: string) => {
         if (type === Credentials.login) {
             setLogin(text)
-        } else if (Credentials.password) {
+        } else if (type === Credentials.password) {
             setPassword(text)
         }
     }
