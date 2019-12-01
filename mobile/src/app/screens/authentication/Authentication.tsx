@@ -1,6 +1,7 @@
 import React, { useState, FC } from 'react';
 import { Text } from 'react-native';
 import { Container, InputContainer, Form, TextInput, SubmitButton } from './Authentication.styles';
+import { storeData } from '../../helpers/asyncStorage'
 
 interface Props {
     onFormSubmit: (credentials: { login: string; password: string }) => void;
@@ -41,6 +42,7 @@ const Authentication: FC<Props> = ({ onFormSubmit }) => {
                 </InputContainer>
                 <InputContainer>
                     <SubmitButton title="Submit" onPress={onSubmit} />
+                    <SubmitButton title="Clear token" onPress={() => storeData("jwtToken", null)} />
                 </InputContainer>
             </Form>
         </Container>
