@@ -1,15 +1,18 @@
 import React, { FC, useState, FormEvent, MouseEventHandler } from 'react';
+import { AuthForm } from './Authentication.styles'
 import Input from '../../atoms/Input/Input';
-import Button from '../../atoms/Button/Button'
+import Button from '../../atoms/Button/Button';
 
 enum AuthCredentials {
     login = 'login',
     password = 'password',
 }
 
-interface Props { }
+interface Props {
+    onFormSubmit: (creds: { login: string; password: string }) => void;
+}
 
-const Authentication: FC<Props> = () => {
+const Authentication: FC<Props> = ({ onFormSubmit }) => {
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -21,15 +24,15 @@ const Authentication: FC<Props> = () => {
     };
 
     const onSubmit: MouseEventHandler<HTMLElement> = (event) => {
-        console.log(login, password)
-    }
+        onFormSubmit({ login, password });
+    };
 
     return (
-        <div>
+        <AuthForm>
             <Input value={login} onChange={onFieldChange(AuthCredentials.login)} />
             <Input value={password} onChange={onFieldChange(AuthCredentials.password)} />
             <Button onClick={onSubmit}>Submit</Button>
-        </div>
+        </AuthForm>
     );
 };
 

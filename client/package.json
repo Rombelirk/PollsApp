@@ -22,7 +22,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettify": "npx prettier --write '**/*.{js,jsx,ts,tsx}'",
-    "precommit": "npm run prettify && npm run test && git add ."
+    "precommit": "npm run prettify && npm run test && git add .",
+    "apollo:generate": "apollo codegen:generate --config=apollo.config.js --includes=./src/modules/**/*.ts --target=typescript --addTypename --excludes=node_modules/*",
+    "apollo:download": "apollo schema:download --config=apollo.config.js --endpoint=http://localhost:3000/graphql graphql-schema.json"
   },
   "eslintConfig": {
     "extends": "react-app"

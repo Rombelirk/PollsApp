@@ -1,8 +1,8 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactChild } from 'react';
 import { Container, Header, Sidebar, Body } from './Layout.styles';
 
 interface Props {
-    children: ReactNode[];
+    children: ReactChild;
 }
 
 const Layout: FC<Props> = ({ children }) => {
