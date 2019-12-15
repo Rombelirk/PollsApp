@@ -9,7 +9,7 @@ export class UserService {
     constructor(
         @InjectModel('User')
         private readonly UserModel: Model<User>
-    ) {}
+    ) { }
 
     async create(createUserInput: UserLoginInput): Promise<User> {
         const { login } = createUserInput;
@@ -22,15 +22,15 @@ export class UserService {
     }
 
     async findOneByLogin(login: string): Promise<User | null> {
-        return this.UserModel.findOne({ login });
+        return await this.UserModel.findOne({ login });
     }
 
     async findById(id: User['_id']): Promise<User | null> {
-        return this.UserModel.findById(id);
+        return await this.UserModel.findById(id);
     }
 
     async findAll(): Promise<User[]> {
-        return this.UserModel.find().exec();
+        return await this.UserModel.find().exec();
     }
 
     async findManyByIds(ids: User['_id'][]): Promise<User[]> {

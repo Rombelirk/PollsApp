@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
 import AuthenticationContainer from './modules/Authentication/AuthenticationContainer';
 import PrivateRoute from './wrappers/PrivateRoute';
-import Tasks from './modules/Tasks/Tasks';
+import Polls from './modules/Polls/Polls';
 import Layout from './modules/Layout/Layout';
 import { ApolloProvider } from 'react-apollo';
 import client from './client';
@@ -16,7 +16,7 @@ const App = () => {
                 <Switch>
                     <Route path='/auth' component={AuthenticationContainer} />
                     <Layout>
-                        <PrivateRoute path='/' component={Tasks} />
+                        <PrivateRoute path='/' component={Polls} />
                     </Layout>
                 </Switch>
             </Router>

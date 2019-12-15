@@ -1,4 +1,4 @@
-import { TaskDto } from './../../task/dto/task.dto';
+import { PollDto } from './../../poll/dto/poll.dto';
 import { InputType, Field } from 'type-graphql';
 
 @InputType()

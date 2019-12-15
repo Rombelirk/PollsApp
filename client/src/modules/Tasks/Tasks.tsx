@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 
-interface Props {}
+interface Props { }
 
-const Tasks: FC<Props> = () => {
-    return <div>Tasks</div>;
+const Polls: FC<Props> = () => {
+    return <div>Polls</div>;
 };
 
-export default Tasks;
+export default Polls;

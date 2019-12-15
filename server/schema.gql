@@ -3,6 +3,11 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input AnswerPollInput {
+  _id: String!
+  optionId: String!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -27,43 +32,52 @@ input LoginInput {
 
 type Mutation {
   createUser(input: UserLoginInput!): UserDto!
-  createTask(input: TaskInput!): TaskDto!
+  closeCurrentPoll: PollDto!
+  createPoll(input: PollInput!): PollDto!
+  giveAnswer(input: AnswerPollInput!): PollDto!
   createFriendshipRequest(userId: String!): FriendshipDto!
   acceptFriendshipRequest(requestId: String!): FriendshipDto!
+}
+
+type PollDto {
+  _id: String!
+  title: String!
+  author: UserDto!
+  create_date: DateTime!
+  options: [PollDtoOptions!]!
+  votes: [PollDtoVotes!]!
+}
+
+type PollDtoOptions {
+  _id: String!
+  option: String!
+}
+
+type PollDtoVotes {
+  user: UserDto!
+  optionId: String!
+}
+
+input PollInput {
+  title: String!
+  options: [String!]!
 }
 
 type Query {
   getSelfInfo: UserDto!
   getAllUsers: [UserDto!]!
-  getTasksAssignedToUser(userId: String!): [TaskDto!]!
+  getPollsCreatedByUser(userId: String!): [PollDto!]!
+  getPollsToAnswer: [PollDto!]!
   login(input: LoginInput!): LoginDto!
-}
-
-type TaskDto {
-  _id: String!
-  title: String!
-  assignees: [UserDto!]!
-  author: UserDto!
-  create_date: DateTime!
-  deadline: DateTime!
-  description: String!
-  imageURL: String!
-}
-
-input TaskInput {
-  title: String!
-  assignees: [String!]
-  deadline: DateTime
-  description: String!
-  imageURL: String!
 }
 
 type UserDto {
   _id: String!
   login: String!
+  currentPoll: PollDto
+  pollHistory: [PollDto!]!
   friends: [UserDto!]!
   friendRequests: [FriendshipDto!]!
-  tasks: [TaskDto!]!
 }
 
 input UserLoginInput {

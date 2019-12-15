@@ -6,17 +6,17 @@ import { FriendshipDto } from './../friendship/dto/friendship.dto';
 import { UserDto } from './dto/user.dto';
 import { UserLoginInput } from './inputs/user-login.input';
 import { UserService } from './user.service';
-import { TaskService } from '../task/task.service';
+import { PollService } from '../poll/poll.service';
 import { FriendshipService } from '../friendship/friendship.service';
 import { User } from './interfaces/user.interface';
-import { TaskDto } from 'src/task/dto/task.dto';
+import { PollDto } from 'src/poll/dto/poll.dto';
 import { FriendshipStatus } from 'src/friendship/enums/friendshipStatus.enum';
 
 @Resolver(() => UserDto)
 export class UserResolver {
     constructor(
         private readonly userService: UserService,
-        private readonly taskService: TaskService,
+        private readonly pollService: PollService,
         private readonly friendshipService: FriendshipService
     ) { }
 
@@ -32,9 +32,15 @@ export class UserResolver {
         return this.userService.findAll();
     }
 
-    @ResolveProperty(() => [TaskDto])
-    async tasks(@Parent() user: User) {
-        return this.taskService.getTasksAssignedToUser(user._id);
+    @ResolveProperty(() => PollDto)
+    async currentPoll(@Parent() user: User) {
+        return this.pollService.getPollById(user.currentPoll);
+    }
+
+    @ResolveProperty(() => [PollDto])
+    async pollHistory(@Parent() user: User) {
+
+        return this.pollService.getPollsById(user.pollHistory);
     }
 
     @ResolveProperty(() => [UserDto])

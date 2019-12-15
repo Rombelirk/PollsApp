@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
-import { TaskModule } from './task/task.module';
+import { PollModule } from './poll/poll.module';
 import { ConfigModule } from './config/config.module';
 import { FriendshipModule } from './friendship/friendship.module';
 
@@ -15,7 +15,7 @@ import { FriendshipModule } from './friendship/friendship.module';
         ConfigModule,
         AuthModule,
         UserModule,
-        TaskModule,
+        PollModule,
         FriendshipModule,
         MongooseModule.forRoot(new ConfigService().get('DATABASE_URL')),
         GraphQLModule.forRoot({
@@ -28,4 +28,4 @@ import { FriendshipModule } from './friendship/friendship.module';
     controllers: [AppController],
     providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

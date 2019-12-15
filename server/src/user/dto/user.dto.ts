@@ -1,5 +1,5 @@
 import { ObjectType, Field } from 'type-graphql';
-import { TaskDto } from 'src/task/dto/task.dto';
+import { PollDto } from 'src/poll/dto/poll.dto';
 import { FriendshipDto } from '../../friendship/dto/friendship.dto';
 @ObjectType()
 export class UserDto {
@@ -9,12 +9,15 @@ export class UserDto {
     @Field()
     login: string;
 
+    @Field((type) => PollDto, { nullable: true })
+    currentPoll: PollDto;
+
+    @Field((type) => PollDto)
+    pollHistory: PollDto[];
+
     @Field((type) => UserDto)
     friends: UserDto[];
 
     @Field((type) => FriendshipDto)
     friendRequests: FriendshipDto[];
-
-    @Field((type) => TaskDto)
-    tasks: TaskDto[];
 }
