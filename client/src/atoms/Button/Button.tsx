@@ -2,7 +2,6 @@ import React, { FC, MouseEventHandler } from 'react';
 import { BaseButton } from './Button.styles';
 
 interface Props {
-    value?: string;
     onClick?: MouseEventHandler<HTMLElement>;
 }
 

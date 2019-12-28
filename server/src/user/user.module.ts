@@ -17,4 +17,4 @@ import { FriendshipModule } from '../friendship/friendship.module';
     providers: [UserService, UserResolver],
     exports: [UserService],
 })
-export class UserModule { }
+export class UserModule {}

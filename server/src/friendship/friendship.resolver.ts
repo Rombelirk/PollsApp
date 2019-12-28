@@ -9,7 +9,7 @@ import { Friendship } from './interfaces/friendship.interface';
 
 @Resolver('Friendship')
 export class FriendshipResolver {
-    constructor(private readonly friendshipService: FriendshipService) { }
+    constructor(private readonly friendshipService: FriendshipService) {}
 
     @Mutation(() => FriendshipDto)
     @UseGuards(GqlAuthGuard)

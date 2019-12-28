@@ -1,6 +1,7 @@
 import { ApolloLink } from 'apollo-link';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
+import { setContext } from 'apollo-link-context';
 import { createHttpLink } from 'apollo-link-http';
 import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
 
@@ -16,7 +17,19 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
     },
 });
 
-const link = ApolloLink.from([httpLink]);
+const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('jwtToken');
+
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : '',
+        },
+    };
+});
+
+console.log(httpLink, authLink)
+const link = ApolloLink.from([authLink, httpLink]);
 
 const cache = new InMemoryCache({ fragmentMatcher });
 

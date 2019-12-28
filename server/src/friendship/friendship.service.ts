@@ -12,7 +12,7 @@ export class FriendshipService {
         @InjectModel('Friendship')
         private readonly friendsipModel: Model<Friendship>,
         private readonly userService: UserService
-    ) { }
+    ) {}
 
     async getUsersFriendship(userIds: [string, string]): Promise<Friendship | null> {
         return this.friendsipModel.findOne({

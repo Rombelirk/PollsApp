@@ -39,7 +39,6 @@ export class UserResolver {
 
     @ResolveProperty(() => [PollDto])
     async pollHistory(@Parent() user: User) {
-
         return this.pollService.getPollsById(user.pollHistory);
     }
 

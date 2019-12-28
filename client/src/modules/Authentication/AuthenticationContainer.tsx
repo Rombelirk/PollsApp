@@ -6,18 +6,14 @@ import { LoginInput } from '../../../__generated__/globalTypes';
 import { AuthenticationQuery } from './__generated__/AuthenticationQuery';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-interface Props extends RouteComponentProps {}
+interface Props extends RouteComponentProps { }
 
 const AuthenticationContainer: FC<Props> = ({ history }) => {
-    const onFormSubmit = async (creds: { login: string; password: string }) => {
-        const { login, password } = creds;
+    const onFormSubmit = async (creds: LoginInput) => {
         try {
-            const result = await client.query<AuthenticationQuery, LoginInput>({
+            const result = await client.query<AuthenticationQuery, { input: LoginInput }>({
                 query: authQuery,
-                variables: {
-                    login,
-                    password,
-                },
+                variables: { input: creds },
             });
 
             if (result.data.login.jwtToken) {

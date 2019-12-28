@@ -17,14 +17,15 @@
     "typescript": "^3.7.2"
   },
   "scripts": {
-    "start": "NODE_PATH=src/ react-scripts start",
+    "start": "NODE_PATH=src/ react-scripts start && npm run types:watch",
     "build": "NODE_PATH=src/ react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettify": "npx prettier --write '**/*.{js,jsx,ts,tsx}'",
     "precommit": "npm run prettify && npm run test && git add .",
-    "apollo:generate": "apollo codegen:generate --config=apollo.config.js --includes=./src/modules/**/*.ts --target=typescript --addTypename --excludes=node_modules/*",
-    "apollo:download": "apollo schema:download --config=apollo.config.js --endpoint=http://localhost:3000/graphql graphql-schema.json"
+    "types:watch": "npm run apollo:download && npm run apollo:generate",
+    "apollo:generate": "apollo codegen:generate --includes=./src/modules/**/*.ts --localSchemaFile=./graphql-schema.json --watch --target=typescript --addTypename --excludes=node_modules/*",
+    "apollo:download": "apollo schema:download --endpoint=http://localhost:3000/graphql graphql-schema.json"
   },
   "eslintConfig": {
     "extends": "react-app"

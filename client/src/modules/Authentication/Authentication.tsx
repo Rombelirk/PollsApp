@@ -1,5 +1,5 @@
 import React, { FC, useState, FormEvent, MouseEventHandler } from 'react';
-import { AuthForm } from './Authentication.styles'
+import { AuthForm } from './Authentication.styles';
 import Input from '../../atoms/Input/Input';
 import Button from '../../atoms/Button/Button';
 

@@ -32,8 +32,8 @@ input LoginInput {
 
 type Mutation {
   createUser(input: UserLoginInput!): UserDto!
-  closeCurrentPoll: PollDto!
-  createPoll(input: PollInput!): PollDto!
+  closeCurrentPoll: UserDto!
+  createPoll(input: PollInput!): UserDto!
   giveAnswer(input: AnswerPollInput!): PollDto!
   createFriendshipRequest(userId: String!): FriendshipDto!
   acceptFriendshipRequest(requestId: String!): FriendshipDto!

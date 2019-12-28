@@ -4,17 +4,17 @@ import { UserDto } from 'src/user/dto/user.dto';
 @ObjectType()
 class PollDtoOptions {
     @Field({ name: '_id' })
-    _id: string
+    _id: string;
     @Field({ name: 'option' })
-    option: string
+    option: string;
 }
 
 @ObjectType()
 class PollDtoVotes {
     @Field((type) => UserDto, { name: 'user' })
-    user: UserDto
+    user: UserDto;
     @Field({ name: 'optionId' })
-    optionId: string
+    optionId: string;
 }
 
 @ObjectType()
@@ -23,7 +23,7 @@ export class PollDto {
     _id: string;
     @Field({ name: 'title' })
     title: string;
-    @Field((type) => UserDto, { name: "author" })
+    @Field((type) => UserDto, { name: 'author' })
     author: UserDto;
     @Field({ name: 'create_date' })
     create_date: Date;
