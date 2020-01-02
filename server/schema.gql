@@ -71,6 +71,11 @@ type Query {
   login(input: LoginInput!): LoginDto!
 }
 
+type Subscription {
+  answerGiven(userId: String!): PollDto!
+  pollCreated(userId: String!): PollDto!
+}
+
 type UserDto {
   _id: String!
   login: String!

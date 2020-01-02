@@ -47,7 +47,8 @@ export class PollService {
         if (!poll) {
             throw new Error('No poll found');
         }
-        if (poll.votes.find((vote) => vote.user === userId)) {
+
+        if (poll.votes.find((vote) => vote.user.equals(userId))) {
             throw new Error('This user has already voted in this poll');
         }
         poll.votes.push({ user: userId, optionId });

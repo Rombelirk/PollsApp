@@ -8,7 +8,6 @@ const getPollsToAnswer = gql`
         getPollsToAnswer {
             _id
             title
-         
             options {
                 _id
                 option

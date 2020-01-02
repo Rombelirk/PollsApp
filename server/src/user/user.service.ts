@@ -6,9 +6,7 @@ import { UserLoginInput } from './inputs/user-login.input';
 
 @Injectable()
 export class UserService {
-    constructor(
-        @InjectModel('User') private readonly UserModel: Model<User>
-    ) { }
+    constructor(@InjectModel('User') private readonly UserModel: Model<User>) {}
 
     async create(createUserInput: UserLoginInput): Promise<User> {
         const { login } = createUserInput;

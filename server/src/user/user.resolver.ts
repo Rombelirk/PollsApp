@@ -18,7 +18,7 @@ export class UserResolver {
         private readonly userService: UserService,
         private readonly pollService: PollService,
         private readonly friendshipService: FriendshipService
-    ) { }
+    ) {}
 
     @Query((returns) => UserDto)
     @UseGuards(GqlAuthGuard)

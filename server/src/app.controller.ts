@@ -7,8 +7,8 @@ import { Response } from 'express';
 export class AppController {
     constructor(private readonly appService: AppService) { }
 
-    @Get("*")
-    get(@Res() res: Response): void {
-        res.sendFile(join(process.cwd(), '../../client/build/index.html'))
+    @Get("/hello")
+    get(@Res() res: Response): string {
+        return "hello"
     }
 }

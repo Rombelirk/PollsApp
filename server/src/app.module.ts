@@ -23,9 +23,12 @@ import { FriendshipModule } from './friendship/friendship.module';
             context: ({ req }) => ({ req }),
             debug: true,
             playground: true,
+            typePaths: ['./**/*.graphql'],
+            installSubscriptionHandlers: true,
         }),
+
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [AppService]
 })
-export class AppModule {}
+export class AppModule { }
