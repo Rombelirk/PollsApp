@@ -7,11 +7,11 @@ interface Props {
 }
 
 const Popup: FC<Props> = ({ show, children }) => {
-    return <Container>
-        <Card>
-            {children}
-        </Card>
-    </Container>
+    return (
+        <Container>
+            <Card>{children}</Card>
+        </Container>
+    );
 };
 
 export default Popup;

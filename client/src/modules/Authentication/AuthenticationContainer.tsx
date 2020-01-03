@@ -6,7 +6,7 @@ import { LoginInput } from '../../../__generated__/globalTypes';
 import { AuthenticationQuery } from './__generated__/AuthenticationQuery';
 import { withRouter, RouteComponentProps } from 'react-router';
 
-interface Props extends RouteComponentProps { }
+interface Props extends RouteComponentProps {}
 
 const AuthenticationContainer: FC<Props> = ({ history }) => {
     const onFormSubmit = async (creds: LoginInput) => {

@@ -1,0 +1,10 @@
+body {
+    margin: 0px;
+    font-family: 'Varela_Round';
+}
+
+
+@font-face {
+    font-family: "Varela_Round";
+    src: url(./fonts/Varela_Round/VarelaRound-Regular.ttf);
+}

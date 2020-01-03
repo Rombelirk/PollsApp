@@ -22,8 +22,8 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 const wsLink = new WebSocketLink({
     uri: `ws://localhost:3000/graphql`,
     options: {
-        reconnect: true
-    }
+        reconnect: true,
+    },
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -40,10 +40,7 @@ const authLink = setContext((_, { headers }) => {
 const splitLink = split(
     ({ query }) => {
         const definition = getMainDefinition(query);
-        return (
-            definition.kind === 'OperationDefinition' &&
-            definition.operation === 'subscription'
-        );
+        return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
     },
     wsLink,
     httpLink

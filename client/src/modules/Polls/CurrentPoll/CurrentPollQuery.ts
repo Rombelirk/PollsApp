@@ -16,7 +16,4 @@ const currentPoll = gql`
     }
 `;
 
-
-
-
 export default currentPoll;

@@ -1,7 +1,4 @@
-
-
 import gql from 'graphql-tag';
-
 
 const getPollsToAnswer = gql`
     query getPollsToAnswer {
@@ -13,9 +10,7 @@ const getPollsToAnswer = gql`
                 option
             }
         }
-   
     }
-    
 `;
 
-export default getPollsToAnswer
+export default getPollsToAnswer;

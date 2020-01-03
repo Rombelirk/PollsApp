@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { Router, Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
 import AuthenticationContainer from './modules/Authentication/AuthenticationContainer';
