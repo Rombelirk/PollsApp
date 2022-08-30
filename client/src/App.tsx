@@ -9,7 +9,7 @@ import Layout from './modules/Layout/Layout';
 import { ApolloProvider } from 'react-apollo';
 import client from './client';
 const history = createBrowserHistory();
-//test
+//test3
 const App = () => {
     return (
         <ApolloProvider client={client}>
