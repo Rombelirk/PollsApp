@@ -28,7 +28,7 @@
     "@nestjs/jwt": "^6.1.1",
     "@nestjs/mongoose": "^6.1.2",
     "@nestjs/passport": "^6.1.0",
-    "@nestjs/platform-express": "^6.0.0",
+    "@nestjs/platform-express": "^9.2.1",
     "apollo-server-express": "^2.9.6",
     "dotenv": "^8.2.0",
     "graphql": "^14.5.8",
