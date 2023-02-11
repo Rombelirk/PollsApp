@@ -11,7 +11,7 @@
     "apollo:download": "apollo schema:download --config=apollo.config.js --endpoint=http://localhost:3000/graphql graphql-schema.json"
   },
   "dependencies": {
-    "apollo": "^2.15.0",
+    "apollo": "^2.34.0",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
     "expo": "^35.0.0",
